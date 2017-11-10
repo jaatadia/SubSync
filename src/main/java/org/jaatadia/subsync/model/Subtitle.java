@@ -1,6 +1,5 @@
 package org.jaatadia.subsync.model;
 
-import org.jaatadia.subsync.model.exceptions.InvalidRequestException;
 import org.jaatadia.subsync.model.exceptions.InvalidSubtitleException;
 
 public class Subtitle implements Synchronizable{
@@ -9,7 +8,7 @@ public class Subtitle implements Synchronizable{
     private TimeRange timeRange;
     private String text;
 
-    public Subtitle(String sub) throws InvalidRequestException {
+    public Subtitle(String sub) throws InvalidSubtitleException {
 
         String[] lines = sub.trim().split("\n");
         if (lines.length < 2 || !(lines[0].matches("^[0-9]+$"))) throw new InvalidSubtitleException(sub);
@@ -20,6 +19,12 @@ public class Subtitle implements Synchronizable{
         this.text = this.text.trim();
     }
 
+    public Subtitle(int number, TimeRange timeRange, String text) throws InvalidSubtitleException{
+        this.number = number;
+        this.timeRange = timeRange;
+        this.text = text;
+        if(number<1) throw new InvalidSubtitleException(this.toString());
+    }
 
     public Synchronizable synchronize(int milliseconds) {
         timeRange.synchronize(milliseconds);

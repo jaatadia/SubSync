@@ -1,10 +1,9 @@
 package org.jaatadia.subsync.model;
 
-import org.jaatadia.subsync.model.exceptions.InvalidRequestException;
 import org.jaatadia.subsync.model.exceptions.InvalidSubtitleException;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class SubtitleTest {
 
@@ -23,7 +22,7 @@ public class SubtitleTest {
             try {
                 new Subtitle(value);
                 assert (false);
-            } catch (InvalidRequestException t) {
+            } catch (InvalidSubtitleException t) {
                 assert (true);
             }
         }
