@@ -5,7 +5,7 @@ import org.jaatadia.subsync.model.exceptions.InvalidTimeStampException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class TimeStamp implements Synchronizable{
+public class TimeStamp implements Synchronizable, Comparable<TimeStamp>{
 
     private int hours;
     private int minutes;
@@ -66,5 +66,13 @@ public class TimeStamp implements Synchronizable{
         minutes = 0;
         seconds = 0;
         millis = 0;
+    }
+
+    private int toMillis(){
+        return hours*3600000 + minutes * 60000 + seconds *1000 + millis;
+    }
+
+    public int compareTo(TimeStamp o) {
+        return toMillis()-o.toMillis();
     }
 }
