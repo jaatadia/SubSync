@@ -1,8 +1,8 @@
 package org.jaatadia.subsync.model.exceptions;
 
-public class InvalidTimeStampException extends Exception {
+public class InvalidTimeStampException extends InvalidRequestException {
 
-    public InvalidTimeStampException(String range){
-        super("Timestamp is not valid: "+range);
+    public InvalidTimeStampException(String timestamp){
+        super("Timestamp is not valid: "+timestamp);
     }
 }

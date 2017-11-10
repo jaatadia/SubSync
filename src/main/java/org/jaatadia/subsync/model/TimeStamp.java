@@ -28,12 +28,12 @@ public class TimeStamp implements Synchronizable, Comparable<TimeStamp>{
         return String.format("%02d:%02d:%02d,%03d",hours,minutes,seconds, millis);
     }
 
-    public Synchronizable synchronize(int miliseconds) {
+    public Synchronizable synchronize(int milliseconds) {
 
-        millis += miliseconds%1000;
-        seconds += (miliseconds/1000)%60;
-        minutes += (miliseconds/(60000))%60;
-        hours += miliseconds/3600000;
+        millis += milliseconds%1000;
+        seconds += (milliseconds/1000)%60;
+        minutes += (milliseconds/(60000))%60;
+        hours += milliseconds/3600000;
         balance();
 
         return this;
