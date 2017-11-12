@@ -3,13 +3,14 @@ package org.jaatadia.subsync.model;
 import org.jaatadia.subsync.model.exceptions.InvalidSubtitleException;
 
 import java.util.ArrayList;
-import java.util.Vector;
+import java.util.Arrays;
+import java.util.Optional;
 
 public class SubtitleGroup {
     private ArrayList<Subtitle> subtitles = new ArrayList<>();
 
     public SubtitleGroup(String file) throws InvalidSubtitleException {
-       String[] subs = file.split("\n\n");
+        String[] subs = file.split("\n\n+");
         for (int i = 0;i<subs.length;i++){
             Subtitle s = new Subtitle(subs[i]);
             s.setNumber(i+1);
@@ -17,29 +18,17 @@ public class SubtitleGroup {
         }
     }
 
-    public SubtitleGroup(Vector<Vector<String>> subs) throws InvalidSubtitleException {
-        for (int i = 0;i<subs.size();i++){
-            Subtitle s = new Subtitle(subs.get(i));
-            s.setNumber(i+1);
-            this.subtitles.add(s);
-        }
-    }
-
     @Override
     public String toString() {
-        String result = "";
-        for (Subtitle s : subtitles){
-            result += s.toString()+"\n\n";
-        }
-        return result.trim();
+        return subtitles.stream().map( x -> x.toString() ).reduce( (x, y) -> x+"\n\n"+y ).orElse("").trim();
     }
 
-    public Vector<Vector<String>> toVector(){
-        Vector<Vector<String>> v=new Vector<>();
-        for ( Subtitle s : subtitles){
-            v.add(s.toVector());
-        }
-        return v;
+    public int size(){
+        return subtitles.size();
+    }
+
+    public Subtitle get(int row){
+        return subtitles.get(row);
     }
 
 

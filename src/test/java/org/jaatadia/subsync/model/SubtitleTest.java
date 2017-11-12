@@ -34,15 +34,7 @@ public class SubtitleTest {
 
     @Test
     public void synchronize() throws Exception {
-        Vector<String> origV = new Vector<>(); origV.add("1");origV.add("00:00:00,723 --> 00:00:01,723");origV.add("foo\nbar");
-        Vector<String> expectedV = new Vector<>(); expectedV.add("1");expectedV.add("00:00:01,723 --> 00:00:02,723");expectedV.add("foo\nbar");
         assertEquals("1\n00:00:01,723 --> 00:00:02,723\nfoo\nbar",new Subtitle("1\n00:00:00,723 --> 00:00:01,723\nfoo\nbar").synchronize(1000).toString());
-        assertEquals("1\n00:00:01,723 --> 00:00:02,723\nfoo\nbar",new Subtitle(origV).synchronize(1000).toString());
-
-        Subtitle sub = new Subtitle("1\n00:00:00,723 --> 00:00:01,723\nfoo\nbar");
-        sub.synchronize(1000);
-        assertEquals(expectedV,sub.toVector());
-
     }
 
 }
