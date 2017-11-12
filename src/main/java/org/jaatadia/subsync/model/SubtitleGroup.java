@@ -3,8 +3,6 @@ package org.jaatadia.subsync.model;
 import org.jaatadia.subsync.model.exceptions.InvalidSubtitleException;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Optional;
 
 public class SubtitleGroup {
     private ArrayList<Subtitle> subtitles = new ArrayList<>();

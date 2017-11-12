@@ -1,8 +1,6 @@
 package org.jaatadia.subsync.view;
 
-import org.jaatadia.subsync.model.SubtitleGroup;
-import org.jaatadia.subsync.model.exceptions.InvalidSubtitleException;
-import org.jaatadia.subsync.model.exceptions.SubtitleTable;
+import org.jaatadia.subsync.model.SubtitleTable;
 
 import javax.swing.*;
 import java.awt.*;

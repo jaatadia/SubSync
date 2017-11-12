@@ -1,6 +1,4 @@
-package org.jaatadia.subsync.model.exceptions;
-
-import org.jaatadia.subsync.model.SubtitleGroup;
+package org.jaatadia.subsync.model;
 
 import javax.swing.table.AbstractTableModel;
 

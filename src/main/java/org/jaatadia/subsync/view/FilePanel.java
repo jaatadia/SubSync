@@ -2,9 +2,6 @@ package org.jaatadia.subsync.view;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.File;
 
 public class FilePanel extends JPanel {
 
