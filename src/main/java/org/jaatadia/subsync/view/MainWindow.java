@@ -9,7 +9,9 @@ public class MainWindow extends JFrame {
     public SubtitlePanel subtitlePanel = new SubtitlePanel();
     public DelayPanel delayPanel = new DelayPanel();
     public RangePanel rangePanel = new RangePanel();
+    public JCheckBox replaceBox = new JCheckBox("Replace File");
     public JButton applyButton = new JButton("Apply");
+
 
     public MainWindow() {
         super("Subtitle Synchronizer");
@@ -67,6 +69,20 @@ public class MainWindow extends JFrame {
         cDelay.anchor=GridBagConstraints.EAST;
         cDelay.insets=new Insets(2,2,2,2);
         add(delayPanel,cDelay);
+
+
+        GridBagConstraints cReplace = new GridBagConstraints();
+        cReplace.gridwidth=1;
+        cReplace.gridheight=1;
+        cReplace.gridx = 0;
+        cReplace.gridy = 3;
+        cReplace.weightx=0;
+        cReplace.weighty=0;
+        cReplace.fill=GridBagConstraints.NONE;
+        cReplace.anchor=GridBagConstraints.WEST;
+        cReplace.insets=new Insets(2,2,2,2);
+        add(replaceBox,cReplace);
+        replaceBox.setSelected(true);
 
         GridBagConstraints cApply = new GridBagConstraints();
         cApply.gridwidth=1;

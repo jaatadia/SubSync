@@ -65,10 +65,23 @@ public class Controller {
 
     private class ApplyActionListener implements ActionListener{
 
+        private String getFileName(){
+            String fileName = mainWindow.filePanel.pathToFile.getText();
+            if (mainWindow.replaceBox.isSelected()) return fileName;
+            String baseName=fileName.replaceAll("[0-9]*\\.srt$","");
+            int i;
+            for (i=1;i<999;i++){
+                if(!new File(baseName+String.format("%03d.srt",i)).exists()) break;
+            }
+            return baseName+String.format("%03d.srt",i);
+        }
+
         private void printToFile() throws FileNotFoundException {
-            PrintWriter out = new PrintWriter(mainWindow.filePanel.pathToFile.getText());
+            String fileName = getFileName();
+            PrintWriter out = new PrintWriter(fileName);
             out.print(mainWindow.subtitlePanel.subtitles.toString());
             out.close();
+            mainWindow.filePanel.pathToFile.setText(fileName);
         }
 
         @Override
