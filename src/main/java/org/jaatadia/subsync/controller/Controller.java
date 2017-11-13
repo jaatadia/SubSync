@@ -1,5 +1,9 @@
 package org.jaatadia.subsync.controller;
 
+import org.jaatadia.subsync.controller.range.RangeMode;
+import org.jaatadia.subsync.controller.range.RangeModeAll;
+import org.jaatadia.subsync.controller.range.RangeModeFrom;
+import org.jaatadia.subsync.controller.range.RangeModeFromTo;
 import org.jaatadia.subsync.model.SubtitleGroup;
 import org.jaatadia.subsync.view.MainWindow;
 
@@ -21,39 +25,8 @@ public class Controller {
         mainWindow.filePanel.browseButton.addActionListener(new BrowseListener());
         mainWindow.applyButton.addActionListener(new ApplyActionListener());
         mainWindow.rangePanel.optionAll.addActionListener( e -> rangeMode = new RangeModeAll());
-        mainWindow.rangePanel.optionFrom.addActionListener( e -> rangeMode = new RangeModeFrom());
-        mainWindow.rangePanel.optionFromTo.addActionListener( e -> rangeMode = new RangeModeFromTo());
-    }
-
-    private interface RangeMode {
-        void sync();
-    }
-
-    private class RangeModeAll implements RangeMode {
-        @Override
-        public void sync() {
-            int millis = 1;
-            mainWindow.subtitlePanel.subtitles.synchronize(millis);
-        }
-    }
-
-    private class RangeModeFrom implements RangeMode {
-        @Override
-        public void sync() {
-            int from = mainWindow.rangePanel.spinnerModelFrom.getNumber().intValue();
-            int millis = 1;
-            mainWindow.subtitlePanel.subtitles.synchronize(millis, from);
-        }
-    }
-
-    private class RangeModeFromTo implements RangeMode {
-        @Override
-        public void sync() {
-            int from = mainWindow.rangePanel.spinnerModelFrom.getNumber().intValue();
-            int to = mainWindow.rangePanel.spinnerModelTo.getNumber().intValue();
-            int millis = 1;
-            mainWindow.subtitlePanel.subtitles.synchronize(millis, from, to);
-        }
+        mainWindow.rangePanel.optionFrom.addActionListener( e -> rangeMode = new RangeModeFrom(mainWindow.rangePanel.spinnerModelFrom));
+        mainWindow.rangePanel.optionFromTo.addActionListener( e -> rangeMode = new RangeModeFromTo(mainWindow.rangePanel.spinnerModelFrom,mainWindow.rangePanel.spinnerModelTo));
     }
 
     private class BrowseListener implements ActionListener{
@@ -94,7 +67,7 @@ public class Controller {
         public void actionPerformed(ActionEvent e) {
             try {
                 if(mainWindow.subtitlePanel.subtitles.getRowCount()==0) throw new Exception("Must select a valid subtitle file first");
-                rangeMode.sync();
+                rangeMode.sync(mainWindow.subtitlePanel.subtitles,1);
                 printToFile();
                 JOptionPane.showMessageDialog(mainWindow, "Subtitles saved to: "+mainWindow.filePanel.pathToFile.getText());
             } catch (Exception e1) {
