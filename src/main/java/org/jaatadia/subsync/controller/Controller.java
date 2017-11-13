@@ -18,11 +18,11 @@ public class Controller {
 
     public Controller(MainWindow mainWindow) {
         this.mainWindow = mainWindow;
-        mainWindow.browseButton.addActionListener(new BrowseListener());
+        mainWindow.filePanel.browseButton.addActionListener(new BrowseListener());
         mainWindow.applyButton.addActionListener(new ApplyActionListener());
-        mainWindow.optionAll.addActionListener( e -> rangeMode = new RangeModeAll());
-        mainWindow.optionFrom.addActionListener( e -> rangeMode = new RangeModeFrom());
-        mainWindow.optionFromTo.addActionListener( e -> rangeMode = new RangeModeFromTo());
+        mainWindow.rangePanel.optionAll.addActionListener( e -> rangeMode = new RangeModeAll());
+        mainWindow.rangePanel.optionFrom.addActionListener( e -> rangeMode = new RangeModeFrom());
+        mainWindow.rangePanel.optionFromTo.addActionListener( e -> rangeMode = new RangeModeFromTo());
     }
 
     private interface RangeMode {
@@ -33,26 +33,26 @@ public class Controller {
         @Override
         public void sync() {
             int millis = 1;
-            mainWindow.subtitles.synchronize(millis);
+            mainWindow.subtitlePanel.subtitles.synchronize(millis);
         }
     }
 
     private class RangeModeFrom implements RangeMode {
         @Override
         public void sync() {
-            int from = mainWindow.spinnerModelFrom.getNumber().intValue();
+            int from = mainWindow.rangePanel.spinnerModelFrom.getNumber().intValue();
             int millis = 1;
-            mainWindow.subtitles.synchronize(millis, from);
+            mainWindow.subtitlePanel.subtitles.synchronize(millis, from);
         }
     }
 
     private class RangeModeFromTo implements RangeMode {
         @Override
         public void sync() {
-            int from = mainWindow.spinnerModelFrom.getNumber().intValue();
-            int to = mainWindow.spinnerModelTo.getNumber().intValue();
+            int from = mainWindow.rangePanel.spinnerModelFrom.getNumber().intValue();
+            int to = mainWindow.rangePanel.spinnerModelTo.getNumber().intValue();
             int millis = 1;
-            mainWindow.subtitles.synchronize(millis, from, to);
+            mainWindow.subtitlePanel.subtitles.synchronize(millis, from, to);
         }
     }
 
@@ -71,8 +71,8 @@ public class Controller {
                     }
                     String fileContent = new String(Files.readAllBytes(file.toPath())).replace("\r\n","\n").trim();
                     SubtitleGroup subs = new SubtitleGroup(fileContent);
-                    mainWindow.subtitles.setSubs(subs);
-                    mainWindow.pathToFile.setText(file.getAbsolutePath());
+                    mainWindow.subtitlePanel.subtitles.setSubs(subs);
+                    mainWindow.filePanel.pathToFile.setText(file.getAbsolutePath());
                 } else {
                     System.out.println("Open command cancelled by user.");
                 }
@@ -85,18 +85,18 @@ public class Controller {
     private class ApplyActionListener implements ActionListener{
 
         private void printToFile() throws FileNotFoundException {
-            PrintWriter out = new PrintWriter(mainWindow.pathToFile.getText());
-            out.print(mainWindow.subtitles.toString());
+            PrintWriter out = new PrintWriter(mainWindow.filePanel.pathToFile.getText());
+            out.print(mainWindow.subtitlePanel.subtitles.toString());
             out.close();
         }
 
         @Override
         public void actionPerformed(ActionEvent e) {
             try {
-                if(mainWindow.subtitles.getRowCount()==0) throw new Exception("Must select a valid subtitle file first");
+                if(mainWindow.subtitlePanel.subtitles.getRowCount()==0) throw new Exception("Must select a valid subtitle file first");
                 rangeMode.sync();
                 printToFile();
-                JOptionPane.showMessageDialog(mainWindow, "Subtitles saved to: "+mainWindow.pathToFile.getText());
+                JOptionPane.showMessageDialog(mainWindow, "Subtitles saved to: "+mainWindow.filePanel.pathToFile.getText());
             } catch (Exception e1) {
                 JOptionPane.showMessageDialog(mainWindow, e1.getMessage());
             }

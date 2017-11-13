@@ -5,12 +5,15 @@ import java.awt.*;
 
 public class FilePanel extends JPanel {
 
-    public FilePanel(JTextArea textArea, JButton browseButton) {
+    public JTextArea pathToFile = new JTextArea ("PathToFile");
+    public JButton browseButton = new JButton("Browse");
+
+    FilePanel() {
         super(new GridBagLayout());
         setBorder(BorderFactory.createTitledBorder("File to Sync"));
 
-        textArea.setEditable(false);
-        textArea.setBorder(BorderFactory.createLoweredBevelBorder());
+        pathToFile.setEditable(false);
+        pathToFile.setBorder(BorderFactory.createLoweredBevelBorder());
         GridBagConstraints c1 = new GridBagConstraints();
         c1.gridwidth = 1;
         c1.gridheight = 1;
@@ -19,7 +22,7 @@ public class FilePanel extends JPanel {
         c1.weightx = 1;
         c1.weighty = 0;
         c1.fill = GridBagConstraints.HORIZONTAL;
-        add(textArea, c1);
+        add(pathToFile, c1);
 
         GridBagConstraints c2 = new GridBagConstraints();
         c2.gridwidth = 1;

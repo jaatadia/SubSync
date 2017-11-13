@@ -1,37 +1,20 @@
 package org.jaatadia.subsync.view;
 
-import org.jaatadia.subsync.model.SubtitleTable;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class MainWindow extends JFrame {
 
-
-    public JTextArea pathToFile = new JTextArea ("PathToFile");
-    public JButton browseButton = new JButton("Browse");
-    private JPanel filePanel;
-
-    public SubtitleTable subtitles = new SubtitleTable();
-    private JPanel subtitlePanel = new JPanel();
-
-
-    public JRadioButton optionAll = new JRadioButton("All Subtitles");
-    public JRadioButton optionFrom = new JRadioButton("from subtitle: ");
-    public JRadioButton optionFromTo = new JRadioButton("from subtitle # to #");
-    public SpinnerNumberModel spinnerModelFrom = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
-    public SpinnerNumberModel spinnerModelTo = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
-    private SubtitleRangeSelectionPanel sRangeSelectionPanel;
-
-    private DelayPanel delayPanel;
-
+    public FilePanel filePanel = new FilePanel();
+    public SubtitlePanel subtitlePanel = new SubtitlePanel();
+    public DelayPanel delayPanel = new DelayPanel();
+    public RangePanel rangePanel = new RangePanel();
     public JButton applyButton = new JButton("Apply");
 
     public MainWindow() {
         super("Subtitle Synchronizer");
         setBounds(100, 100, 640, 480);
         setMinimumSize(new Dimension(640, 480));
-        initPanels();
         initWindow();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
@@ -71,7 +54,7 @@ public class MainWindow extends JFrame {
         cRange.weighty=0;
         cRange.fill=GridBagConstraints.NONE;
         cRange.insets=new Insets(2,2,2,2);
-        add(sRangeSelectionPanel,cRange);
+        add(rangePanel,cRange);
 
         GridBagConstraints cDelay = new GridBagConstraints();
         cDelay.gridwidth=1;
@@ -99,13 +82,5 @@ public class MainWindow extends JFrame {
 
 
     }
-
-    private void initPanels(){
-        filePanel = new FilePanel(pathToFile,browseButton);
-        subtitlePanel = new SubtitlePanel(subtitles);
-        sRangeSelectionPanel = new SubtitleRangeSelectionPanel(optionAll, optionFrom, optionFromTo, spinnerModelFrom, spinnerModelTo);
-        delayPanel = new DelayPanel();
-    }
-
 
 }

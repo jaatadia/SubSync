@@ -13,7 +13,7 @@ public class DelayPanel extends JPanel{
     public SpinnerNumberModel spinnerModelSec = new SpinnerNumberModel(0,0,59,1);
     public SpinnerNumberModel spinnerModelMillis = new SpinnerNumberModel(0,0,999,1);
 
-    public DelayPanel() {
+    DelayPanel() {
         setBorder(BorderFactory.createTitledBorder("Subtitle delay"));
         setLayout(new GridBagLayout());
 
@@ -110,8 +110,6 @@ public class DelayPanel extends JPanel{
         cMillis.fill=GridBagConstraints.HORIZONTAL;
         cMillis.anchor=GridBagConstraints.WEST;
         cMillis.insets=new Insets(2,2,2,2);
-
-
 
         add(optionDelay,cDelay);
         add(optionToTime,cToTime);

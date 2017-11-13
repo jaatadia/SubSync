@@ -3,9 +3,16 @@ package org.jaatadia.subsync.view;
 import javax.swing.*;
 import java.awt.*;
 
-public class SubtitleRangeSelectionPanel extends JPanel{
+public class RangePanel extends JPanel{
 
-    public SubtitleRangeSelectionPanel(JRadioButton optionAll, JRadioButton optionFrom, JRadioButton optionFromTo, SpinnerNumberModel spinnerModelFrom, SpinnerNumberModel spinnerModelTo) {
+    public JRadioButton optionAll = new JRadioButton("All Subtitles");
+    public JRadioButton optionFrom = new JRadioButton("from subtitle: ");
+    public JRadioButton optionFromTo = new JRadioButton("from subtitle # to #");
+    public SpinnerNumberModel spinnerModelFrom = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
+    public SpinnerNumberModel spinnerModelTo = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
+
+
+    RangePanel() {
         setBorder(BorderFactory.createTitledBorder("Subtitle Range"));
         setLayout(new GridBagLayout());
 

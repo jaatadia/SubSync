@@ -1,5 +1,7 @@
 package org.jaatadia.subsync.view;
 
+import org.jaatadia.subsync.model.SubtitleTable;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableModel;
@@ -7,7 +9,9 @@ import java.awt.*;
 
 public class SubtitlePanel extends JPanel {
 
-    public SubtitlePanel(TableModel table){
+    public SubtitleTable subtitles = new SubtitleTable();
+
+    SubtitlePanel(){
         setLayout(new GridBagLayout());
         setBorder(BorderFactory.createTitledBorder("Subtitles"));
 
@@ -25,7 +29,7 @@ public class SubtitlePanel extends JPanel {
         DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
         centerRenderer.setHorizontalAlignment( JLabel.CENTER );
 
-        JTable t = new JTable(table);
+        JTable t = new JTable(subtitles);
         t.setColumnSelectionAllowed(false);
         t.setRowSelectionAllowed(false);
         t.setAutoResizeMode(JTable.AUTO_RESIZE_LAST_COLUMN);
