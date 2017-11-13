@@ -63,4 +63,21 @@ public class SubtitleTable extends AbstractTableModel {
     }
 
 
+    public void synchronize(int millis) {
+        if(subs==null) return;
+        subs.synchronize(millis);
+        fireTableDataChanged();
+    }
+
+    public void synchronize(int millis, int from) {
+        if(subs==null) return;
+        subs.synchronize(millis,from);
+        fireTableDataChanged();
+    }
+
+    public void synchronize(int millis, int from, int to) {
+        if(subs==null) return;
+        subs.synchronize(millis,from,to);
+        fireTableDataChanged();
+    }
 }

@@ -68,7 +68,7 @@ public class TimeStamp implements Synchronizable, Comparable<TimeStamp>{
         millis = 0;
     }
 
-    private int toMillis(){
+    public int toMillis(){
         return hours*3600000 + minutes * 60000 + seconds *1000 + millis;
     }
 

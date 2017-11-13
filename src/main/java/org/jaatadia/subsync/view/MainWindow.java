@@ -15,7 +15,14 @@ public class MainWindow extends JFrame {
     public SubtitleTable subtitles = new SubtitleTable();
     private JPanel subtitlePanel = new JPanel();
 
-    private JPanel parameterPanel = new JPanel();
+
+    public JRadioButton optionAll = new JRadioButton("All Subtitles");
+    public JRadioButton optionFrom = new JRadioButton("from subtitle #");
+    public JRadioButton optionFromTo = new JRadioButton("from subtitle # to #");
+    public SpinnerNumberModel spinnerModelFrom = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
+    public SpinnerNumberModel spinnerModelTo = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
+    private SubtitleRangeSelectionPanel sRangeSelectionPanel;
+
     public JButton applyButton = new JButton("Apply");
 
     public MainWindow() {
@@ -61,7 +68,7 @@ public class MainWindow extends JFrame {
         c3.weighty=0;
         c3.fill=GridBagConstraints.HORIZONTAL;
         c3.insets=new Insets(2,2,2,2);
-        add(parameterPanel,c3);
+        add(sRangeSelectionPanel,c3);
 
         GridBagConstraints c4 = new GridBagConstraints();
         c4.gridwidth=1;
@@ -79,7 +86,7 @@ public class MainWindow extends JFrame {
     private void initPanels(){
         filePanel = new FilePanel(pathToFile,browseButton);
         subtitlePanel = new SubtitlePanel(subtitles);
-        parameterPanel.setBorder(BorderFactory.createTitledBorder("Parameters"));
+        sRangeSelectionPanel = new SubtitleRangeSelectionPanel(optionAll, optionFrom, optionFromTo, spinnerModelFrom, spinnerModelTo);
     }
 
     public void update(){
