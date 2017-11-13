@@ -17,81 +17,95 @@ public class MainWindow extends JFrame {
 
 
     public JRadioButton optionAll = new JRadioButton("All Subtitles");
-    public JRadioButton optionFrom = new JRadioButton("from subtitle #");
+    public JRadioButton optionFrom = new JRadioButton("from subtitle: ");
     public JRadioButton optionFromTo = new JRadioButton("from subtitle # to #");
     public SpinnerNumberModel spinnerModelFrom = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
     public SpinnerNumberModel spinnerModelTo = new SpinnerNumberModel(1,1,Integer.MAX_VALUE,1);
     private SubtitleRangeSelectionPanel sRangeSelectionPanel;
 
+    private DelayPanel delayPanel;
+
     public JButton applyButton = new JButton("Apply");
 
     public MainWindow() {
         super("Subtitle Synchronizer");
-        setBounds(100, 100, 600, 500);
+        setBounds(100, 100, 640, 480);
+        setMinimumSize(new Dimension(640, 480));
         initPanels();
         initWindow();
         setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
     }
 
-    public void initWindow(){
+    private void initWindow(){
         setLayout(new GridBagLayout());
 
-        GridBagConstraints c1 = new GridBagConstraints();
-        c1.gridwidth=1;
-        c1.gridheight=1;
-        c1.gridx = 0;
-        c1.gridy = 0;
-        c1.weightx=1;
-        c1.weighty=0;
-        c1.fill=GridBagConstraints.HORIZONTAL;
-        c1.insets=new Insets(2,2,2,2);
-        add(filePanel,c1);
+        GridBagConstraints cFile = new GridBagConstraints();
+        cFile.gridwidth=2;
+        cFile.gridheight=1;
+        cFile.gridx = 0;
+        cFile.gridy = 0;
+        cFile.weightx=1;
+        cFile.weighty=0;
+        cFile.fill=GridBagConstraints.HORIZONTAL;
+        cFile.insets=new Insets(2,2,2,2);
+        add(filePanel,cFile);
 
-        GridBagConstraints c2 = new GridBagConstraints();
-        c2.gridwidth=1;
-        c2.gridheight=1;
-        c2.gridx = 0;
-        c2.gridy = 1;
-        c2.weightx=1;
-        c2.weighty=1;
-        c2.fill=GridBagConstraints.BOTH;
-        c2.insets=new Insets(2,2,2,2);
-        add(subtitlePanel,c2);
+        GridBagConstraints cSubtitle = new GridBagConstraints();
+        cSubtitle.gridwidth=2;
+        cSubtitle.gridheight=1;
+        cSubtitle.gridx = 0;
+        cSubtitle.gridy = 1;
+        cSubtitle.weightx=1;
+        cSubtitle.weighty=1;
+        cSubtitle.fill=GridBagConstraints.BOTH;
+        cSubtitle.insets=new Insets(2,2,2,2);
+        add(subtitlePanel,cSubtitle);
 
-        GridBagConstraints c3 = new GridBagConstraints();
-        c3.gridwidth=1;
-        c3.gridheight=1;
-        c3.gridx = 0;
-        c3.gridy = 2;
-        c3.weightx=1;
-        c3.weighty=0;
-        c3.fill=GridBagConstraints.HORIZONTAL;
-        c3.insets=new Insets(2,2,2,2);
-        add(sRangeSelectionPanel,c3);
+        GridBagConstraints cRange = new GridBagConstraints();
+        cRange.gridwidth=1;
+        cRange.gridheight=1;
+        cRange.gridx = 0;
+        cRange.gridy = 2;
+        cRange.weightx=0;
+        cRange.weighty=0;
+        cRange.fill=GridBagConstraints.NONE;
+        cRange.insets=new Insets(2,2,2,2);
+        add(sRangeSelectionPanel,cRange);
 
-        GridBagConstraints c4 = new GridBagConstraints();
-        c4.gridwidth=1;
-        c4.gridheight=1;
-        c4.gridx = 0;
-        c4.gridy = 3;
-        c4.weightx=0;
-        c4.weighty=0;
-        c4.fill=GridBagConstraints.NONE;
-        c4.anchor=GridBagConstraints.EAST;
-        c4.insets=new Insets(2,2,2,2);
-        add(applyButton,c4);
+        GridBagConstraints cDelay = new GridBagConstraints();
+        cDelay.gridwidth=1;
+        cDelay.gridheight=1;
+        cDelay.gridx = 1;
+        cDelay.gridy = 2;
+        cDelay.weightx=0;
+        cDelay.weighty=0;
+        cDelay.fill=GridBagConstraints.BOTH;
+        cDelay.anchor=GridBagConstraints.EAST;
+        cDelay.insets=new Insets(2,2,2,2);
+        add(delayPanel,cDelay);
+
+        GridBagConstraints cApply = new GridBagConstraints();
+        cApply.gridwidth=1;
+        cApply.gridheight=1;
+        cApply.gridx = 1;
+        cApply.gridy = 3;
+        cApply.weightx=0;
+        cApply.weighty=0;
+        cApply.fill=GridBagConstraints.NONE;
+        cApply.anchor=GridBagConstraints.EAST;
+        cApply.insets=new Insets(2,2,2,2);
+        add(applyButton,cApply);
+
+
     }
 
     private void initPanels(){
         filePanel = new FilePanel(pathToFile,browseButton);
         subtitlePanel = new SubtitlePanel(subtitles);
         sRangeSelectionPanel = new SubtitleRangeSelectionPanel(optionAll, optionFrom, optionFromTo, spinnerModelFrom, spinnerModelTo);
+        delayPanel = new DelayPanel();
     }
 
-    public void update(){
-        //getContentPane().validate();
-        getContentPane().repaint();
-    }
 
 }
