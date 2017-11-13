@@ -11,6 +11,7 @@ public class MainWindow extends JFrame {
     public RangePanel rangePanel = new RangePanel();
     public JCheckBox replaceBox = new JCheckBox("Replace File");
     public JButton applyButton = new JButton("Apply");
+    public JButton aboutButton = new JButton("About");
 
 
     public MainWindow() {
@@ -94,8 +95,11 @@ public class MainWindow extends JFrame {
         cApply.fill=GridBagConstraints.NONE;
         cApply.anchor=GridBagConstraints.EAST;
         cApply.insets=new Insets(2,2,2,2);
-        add(applyButton,cApply);
 
+        JPanel buttonPannel = new JPanel(new FlowLayout(FlowLayout.RIGHT));
+        buttonPannel.add(aboutButton);
+        buttonPannel.add(applyButton);
+        add(buttonPannel,cApply);
 
     }
 

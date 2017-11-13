@@ -29,7 +29,6 @@ public class SubtitleGroup {
         return subtitles.get(row);
     }
 
-
     public void synchronize(int milliseconds, int from){
         synchronize(milliseconds,from,subtitles.size());
     }

@@ -6,7 +6,7 @@ import java.awt.*;
 public class DelayPanel extends JPanel{
 
     public JRadioButton optionDelay = new JRadioButton("Delay");
-    public JRadioButton optionToTime = new JRadioButton("First subtitle of selection to: ");
+    public JRadioButton optionToTime = new JRadioButton("First subtitle to:");
     public SpinnerNumberModel spinnerModelDelay = new SpinnerNumberModel(0,0,3600*1000*99,1);
     public SpinnerNumberModel spinnerModelHs = new SpinnerNumberModel(0,0,99,1);
     public SpinnerNumberModel spinnerModelMin = new SpinnerNumberModel(0,0,59,1);

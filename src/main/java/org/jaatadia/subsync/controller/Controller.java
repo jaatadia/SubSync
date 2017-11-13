@@ -11,6 +11,7 @@ import org.jaatadia.subsync.model.SubtitleGroup;
 import org.jaatadia.subsync.view.MainWindow;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -30,6 +31,7 @@ public class Controller {
         delayMode = new DelayModeMillis(mainWindow.delayPanel);
         mainWindow.filePanel.browseButton.addActionListener(new BrowseListener());
         mainWindow.applyButton.addActionListener(new ApplyActionListener());
+        mainWindow.aboutButton.addActionListener(new AboutActionListener());
         mainWindow.rangePanel.optionAll.addActionListener( e -> rangeMode = new RangeModeAll());
         mainWindow.rangePanel.optionFrom.addActionListener( e -> rangeMode = new RangeModeFrom(mainWindow.rangePanel));
         mainWindow.rangePanel.optionFromTo.addActionListener( e -> rangeMode = new RangeModeFromTo(mainWindow.rangePanel));
@@ -60,6 +62,15 @@ public class Controller {
             } catch ( Exception ex ) {
                 JOptionPane.showMessageDialog(mainWindow, ex.getMessage());
             }
+        }
+    }
+
+    private class AboutActionListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            JTextArea label = new JTextArea("Subtitle Synchronizer by Javier Atadia\nhttps://www.linkedin.com/in/jaatadia/");
+            label.setEditable(false); label.setBackground(new Color(0,0,0,0));
+            JOptionPane.showMessageDialog(mainWindow, label);
         }
     }
 
