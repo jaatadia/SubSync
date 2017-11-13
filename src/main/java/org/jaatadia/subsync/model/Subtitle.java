@@ -10,6 +10,20 @@ public class Subtitle implements Synchronizable{
     private TimeRange timeRange;
     private String text;
 
+    public static Subtitle createNetx(Subtitle s, int duration,String text){
+        TimeStamp start = s.timeRange.end.clone();
+        TimeStamp end = s.timeRange.end.clone();
+        end.synchronize(duration);
+        TimeRange range = new TimeRange(start,end);
+        return new Subtitle(s.number+1, range,text);
+    }
+
+    private Subtitle(int number, TimeRange timeRange, String text){
+        this.number = number;
+        this.timeRange = timeRange;
+        this.text = text;
+    }
+
     public Subtitle(String sub) throws InvalidSubtitleException {
         String[] lines = sub.trim().split("\n");
         if (lines.length < 2 || !(lines[0].matches("^[0-9]+$"))) throw new InvalidSubtitleException(sub);

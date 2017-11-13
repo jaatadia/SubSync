@@ -8,6 +8,11 @@ public class TimeRange implements Synchronizable{
     public TimeStamp start;
     public TimeStamp end;
 
+    public TimeRange(TimeStamp start, TimeStamp end){
+        this.start = start;
+        this.end = end;
+    }
+
     public TimeRange(String range) throws InvalidTimeRangeException, InvalidTimeStampException {
         String[] timestamps = range.split("-->");
         if(timestamps.length != 2) throw new InvalidTimeRangeException(range);

@@ -23,6 +23,17 @@ public class TimeStamp implements Synchronizable, Comparable<TimeStamp>{
         millis = Integer.parseInt(res.group(4));
     }
 
+    private TimeStamp(){}
+
+    public TimeStamp clone(){
+        TimeStamp t = new TimeStamp();
+        t.hours=hours;
+        t.minutes = minutes;
+        t.seconds = seconds;
+        t.millis = millis;
+        return t;
+    }
+
     @Override
     public String toString() {
         return String.format("%02d:%02d:%02d,%03d",hours,minutes,seconds, millis);

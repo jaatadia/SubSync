@@ -7,7 +7,9 @@ import org.jaatadia.subsync.controller.range.RangeMode;
 import org.jaatadia.subsync.controller.range.RangeModeAll;
 import org.jaatadia.subsync.controller.range.RangeModeFrom;
 import org.jaatadia.subsync.controller.range.RangeModeFromTo;
+import org.jaatadia.subsync.model.Subtitle;
 import org.jaatadia.subsync.model.SubtitleGroup;
+import org.jaatadia.subsync.model.SubtitleTable;
 import org.jaatadia.subsync.view.MainWindow;
 
 import javax.swing.*;
@@ -76,6 +78,8 @@ public class Controller {
 
     private class ApplyActionListener implements ActionListener{
 
+        private String signature = "<i>Sub Synchronizer by Javier Atadia</i>";
+
         private String getFileName(){
             String fileName = mainWindow.filePanel.pathToFile.getText();
             if (mainWindow.replaceBox.isSelected()) return fileName;
@@ -88,11 +92,18 @@ public class Controller {
         }
 
         private void printToFile() throws FileNotFoundException {
+            SubtitleTable subs = mainWindow.subtitlePanel.subtitles;
             String fileName = getFileName();
             PrintWriter out = new PrintWriter(fileName);
-            out.print(mainWindow.subtitlePanel.subtitles.toString());
+            out.print(subs.toString());
+            sign(out,subs);
             out.close();
             mainWindow.filePanel.pathToFile.setText(fileName);
+        }
+
+        private void sign(PrintWriter out, SubtitleTable subs) {
+            Subtitle lastSub = subs.getSubs().get(subs.getRowCount()-1);
+            if(!lastSub.getText().trim().equals(signature)) out.print("\n\n"+Subtitle.createNetx(lastSub,5000,signature).toString());
         }
 
         @Override
