@@ -1,10 +1,9 @@
 package org.jaatadia.subsync.model;
 
 import org.jaatadia.subsync.model.exceptions.InvalidTimeStampException;
-import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class TimeStampTest {
 

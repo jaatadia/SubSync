@@ -5,8 +5,8 @@ import org.jaatadia.subsync.model.exceptions.InvalidTimeStampException;
 
 public class TimeRange implements Synchronizable{
 
-    private TimeStamp start;
-    private TimeStamp end;
+    public TimeStamp start;
+    public TimeStamp end;
 
     public TimeRange(String range) throws InvalidTimeRangeException, InvalidTimeStampException {
         String[] timestamps = range.split("-->");

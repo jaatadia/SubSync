@@ -4,7 +4,6 @@ import org.jaatadia.subsync.model.SubtitleTable;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.TableModel;
 import java.awt.*;
 
 public class SubtitlePanel extends JPanel {
